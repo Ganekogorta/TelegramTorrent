@@ -1,0 +1,47 @@
+# -*- coding: utf-8 -*-
+print("\033c")
+LICENCIA = """
+BOT.torrent - 1.2 :
+Este programa es software GRATUITO: puedes redistribuirlo y/o modificar
+bajo los términos de la Licencia Pública General GNU publicada por
+la Free Software Foundation, ya sea la versión 3 de la Licencia, o
+(a su elección) cualquier versión posterior.
+
+Este programa se distribuye con la esperanza de que sea útil,
+pero SIN NINGUNA GARANTÍA, ni RESPONSABILIDAD; sin siquiera la garantía implícita de
+COMERCIABILIDAD o APTITUD PARA UN PROPÓSITO PARTICULAR. Ver el
+Licencia pública general GNU para obtener más detalles <https://www.gnu.org/licenses/>.
+
+El USUARIO de este programa, es el UNICO RESPONSABLE, de que el USO del mismo, 
+se limita, al estricto cumplimiento, de cualquier LEY, aplicable.
+"""
+INSTALACION = """BOT.torrent - 1.2 :
+*** Guía para instalar el bot ***
+BOT.torrent es un sencillo script, para un BOT de Telegram, escrito en Python. 
+Su función, es descargar ficheros .torrent y .zip, reenviados al BOT, en un 
+directorio de nuestra elección.
+Este BOT está especialmente pensado, para ejecutarse en un NAS.
+Instalación:
+1: Crear nuestro BOT en Telegram y obtener su TOKEN (Guías multiples en la red)
+2: Instalar python3, en nuestro NAS. (Si no lo tenemos ya instalado)
+3: Instalar pip en nuestro NAS, abriendo una sesión SSH, (Si no lo tenemos ya instalado) 
+--> sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+--> sudo python3 get-pip.py
+4: Instalar pyTelegramBotAPI --> sudo python3 -m pip install pyTelegramBotAPI
+5: Copiar BOT.torrent.py, en nuestro NAS y editar las variables propias DE CADA USUARIO. 
+6: Ejecutar BOT de forma interactiva --> python3 BOT.torrent.py (Por supuesto, se puede arrancar, 
+tambien en background y de formar automatizada)
+A disfrutar ;-)
+
+DekkaR - 2021
+"""
+AYUDA = """BOT.torrent - 1.2 RC :
+/ayuda      : Esta pantalla.
+/start      : LICENCIA GPL, de este programa.
+/instalar   : Guía para instalar este programa.
+Hola        : Nos identifica y muestra nuestro ID de usuario Telegram.  
+"""
+
+# Variables DE CADA USUARIO. Modificar ######################################
+# TOKEN de nuestro BOT
+
