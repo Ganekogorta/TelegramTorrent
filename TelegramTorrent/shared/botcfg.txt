@@ -1,0 +1,4 @@
+TOKEN = '1234567890:Cadena_Generada_Por_Telegram'
+ruta = '/share/MD0_DATA/Download/Telegram/'
+rutaPDF = '/share/MD0_DATA/MisPDFs/'
+usuarios = {1234321 : 'usuario1', 123454321 : 'usuario2'}
