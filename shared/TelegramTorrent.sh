@@ -23,7 +23,7 @@ case "$1" in
 	#compruebo si NO existe flag.txt es el primer arranque. No inicio bot por no tener configuracion correcta
 	if [ ! -f $QPKG_ROOT/flag.txt ];
 	then
-		# creo el archivo flag para saber que 
+		# creo el archivo flag para saber que es primer arranque
 		touch $QPKG_ROOT/flag.txt
 		#instalo pip
 		sudo $dirQPython/bin/python3 $QPKG_ROOT/get-pip.py
@@ -31,41 +31,12 @@ case "$1" in
 		sudo $dirQPython/bin/python3 -m pip install pyTelegramBotAPI
 		#creo archivo flag2.txt como señal de futuros reinicios del servicio
 		touch $QPKG_ROOT/flag2.txt
-		chmod 660 $QPKG_ROOT/flag2.txt
-		
-		# creo enlace simbolico a la página web
-		ln -s $QPKG_ROOT/web /home/Qhttpd/Web/TelegramTorrent
-		# creo enlace simbólico al archivo de configuración
-		ln -s $QPKG_ROOT/botcfg.txt /home/Qhttpd/Web/TelegramTorrent/botcfg.txt
-		chmod 660 $QPKG_ROOT/botcfg.txt
-		# creo enlace simbólico al archivo flag2.txt
-		ln -s $QPKG_ROOT/flag2.txt /home/Qhttpd/Web/TelegramTorrent/flag2.txt
-		chmod 660 $QPKG_ROOT/flag2.txt
-		# creo enlace simbólico al inicio del archivo de configuración
-		ln -s $QPKG_ROOT/botini.txt /home/Qhttpd/Web/TelegramTorrent/botini.txt
-		# creo enlace simbólico al final archivo de configuración
-		ln -s $QPKG_ROOT/botfin.txt /home/Qhttpd/Web/TelegramTorrent/botfin.txt
-		# creo enlace simbólico al archivo de configuración
-		ln -s $QPKG_ROOT/BotTorrent.py /home/Qhttpd/Web/TelegramTorrent/BotTorrent.py
-		chmod 660 $QPKG_ROOT/BotTorrent.py
+		#asigno permisos para que el usuario httpdusr pueda modificarlos
+		chmod 666 $QPKG_ROOT/flag2.txt
+		chmod 666 $QPKG_ROOT/botcfg.txt
+		chmod 666 $QPKG_ROOT/BotTorrent.py
 	else
-	    # creo enlace simbolico a la página web
-		ln -s $QPKG_ROOT/web /home/Qhttpd/Web/TelegramTorrent
-		# creo enlace simbólico al archivo de configuración
-		ln -s $QPKG_ROOT/botcfg.txt /home/Qhttpd/Web/TelegramTorrent/botcfg.txt
-		chmod 660 $QPKG_ROOT/botcfg.txt
-		# creo enlace simbólico al archivo flag2.txt
-		ln -s $QPKG_ROOT/flag2.txt /home/Qhttpd/Web/TelegramTorrent/flag2.txt
-		chmod 660 $QPKG_ROOT/flag2.txt
-		# creo enlace simbólico al inicio del archivo de configuración
-		ln -s $QPKG_ROOT/botini.txt /home/Qhttpd/Web/TelegramTorrent/botini.txt
-		# creo enlace simbólico al final archivo de configuración
-		ln -s $QPKG_ROOT/botfin.txt /home/Qhttpd/Web/TelegramTorrent/botfin.txt
-		# creo enlace simbólico al archivo de configuración
-		ln -s $QPKG_ROOT/BotTorrent.py /home/Qhttpd/Web/TelegramTorrent/BotTorrent.py
-		chmod 660 $QPKG_ROOT/BotTorrent.py
-		
-		#tarea de activar Telegram Torrent en segundo plano
+	    #tarea de activar Telegram Torrent en segundo plano
 		$dirQPython/bin/python3 $QPKG_ROOT/BotTorrent.py &
 	fi
 	
@@ -75,25 +46,18 @@ case "$1" in
 	crontab  /etc/config/crontab
 	/etc/init.d/crond.sh restart
 	
-
     ;;
 
   stop)
     : ADD STOP ACTIONS HERE
-	#elimino los enlaces simbólicos para que no se pueda entrar en la web de configuración
-	rm /home/Qhttpd/Web/TelegramTorrent/botcfg.txt
-	rm /home/Qhttpd/Web/TelegramTorrent/botini.txt
-	rm /home/Qhttpd/Web/TelegramTorrent/botfin.txt
-	rm /home/Qhttpd/Web/TelegramTorrent/BotTorrent.py
-    rm /home/Qhttpd/Web/TelegramTorrent
-	
+		
 	#eliminar lineas de tareas autorranque en crontab
     sed -i '/comprobador.sh/d' /etc/config/crontab
 	#tarea de activar crontab editado
 	crontab  /etc/config/crontab
 	/etc/init.d/crond.sh restart
 	
-	#tarea de desactivar Telegram Torrent
+	#tarea de desactivación de Telegram Torrent
     ps | grep BotTorrent | grep -v grep | awk '{ print $1} ' | xargs kill
 	;;
 
