@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$archivo="clave.md5";
+$archivo="../clave.md5";
 $filesize = filesize($archivo);
 $password = "";
 if ($filesize == 0){
@@ -15,7 +15,7 @@ if($_POST['password']){
     if(md5($_POST['password']) == $password){
         $_SESSION['password'] = "alm";
     }else{
-		echo "<span style='color:red;font-weight:bold;'>La contraseña .$password. es incorrecta</span>";
+		echo "<span style='color:red;font-weight:bold;'>La contraseña $password es incorrecta</span>";
     }}
 	
 if(!$_SESSION['password']){
@@ -58,30 +58,30 @@ $usuarios = "";
 if (!empty($_REQUEST['usuarios'])){
  $usuarios = $_REQUEST['usuarios'];
 }
-$archivo = "botcfg.txt";
+$archivo = "../botcfg.txt";
 $file = fopen($archivo,"w");
 fwrite($file,"TOKEN = '".$post."'\n"."ruta = '".$torrent."'\n"."rutaPDF = '".$pdf."'\n"."usuarios = {".$usuarios."}\n");
 fclose($file);
 }
-$archivo = "flag2.txt";
+$archivo = "../flag2.txt";
 $file = fopen($archivo,"w");
-fwrite($file,"toca reiniciar");
+fwrite($file,"escribo algo de contenido para reiniciar TelegramTorrent");
 fclose($file);
 
 
-$out = fopen("BotTorrent.py", "w");
-          $in = fopen("botini.txt", "r");
+$out = fopen("../BotTorrent.py", "w");
+          $in = fopen("../botini.txt", "r");
           while ($line = fgets($in)){
                 /*print $file;*/
                fwrite($out, $line);
           }
-          $in = fopen("botcfg.txt", "r");
+          $in = fopen("../botcfg.txt", "r");
           while ($line = fgets($in)){
                 /*print $file;*/
                fwrite($out, $line);
           }
           fclose($in);
-		  $in = fopen("botfin.txt", "r");
+		  $in = fopen("../botfin.txt", "r");
           while ($line = fgets($in)){
                 /*print $file;*/
                fwrite($out, $line);
@@ -90,13 +90,13 @@ $out = fopen("BotTorrent.py", "w");
 		fclose($out);
 
 
-$ar = fopen("botcfg.txt","r") or die("No se pudo abrir el archivo");
+$ar = fopen("../botcfg.txt","r") or die("No se pudo abrir el archivo");
 $i=0;
 while (!feof($ar)){
  $linea = fgets($ar);
  $i = $i + 1 ;
- $lineasalto = nl2br($linea);
- /*echo $lineasalto; */
+ /*$lineasalto = nl2br($linea);
+ echo $lineasalto; */
  if ($i == 1) $valor1 = $linea ;
  if ($i == 2) $valor2 = $linea ;
  if ($i == 3) $valor3 = $linea ;
@@ -154,7 +154,7 @@ if(isset($_POST['Actualizar'])){
    $clave = $_REQUEST['clave'];
 }
 $clave=md5($clave);
-$archivo = "clave.md5";
+$archivo = "../clave.md5";
 $file = fopen($archivo,"w+");
 fwrite($file,$clave);
 fclose($file);
