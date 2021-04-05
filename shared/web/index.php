@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$archivo="clave.md5";
+$archivo="../clave.md5";
 $filesize = filesize($archivo);
 $password = "";
 if ($filesize == 0){
@@ -154,7 +154,7 @@ if(isset($_POST['Actualizar'])){
    $clave = $_REQUEST['clave'];
 }
 $clave=md5($clave);
-$archivo = "clave.md5";
+$archivo = "../clave.md5";
 $file = fopen($archivo,"w+");
 fwrite($file,$clave);
 fclose($file);
